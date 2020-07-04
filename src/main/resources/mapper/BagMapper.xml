@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--这里注意要对应扫描的mapper接口 本项目中就是 mapper包中对应的bagMapper 方法名什么的都对应-->
+<mapper namespace="dadawang.springbootmybaits.mapper.BagMapper">
+    <!--指定映射的实体类 jdbcType 用来指定数据库类型  javaType用来指定实体类中的类型 可以不指定-->
+    <!--resultMapper 可以手动指定如何对应 还有聚合查询和聚合结果的使用方法-->
+    <resultMap id="bagResultMap" type="dadawang.springbootmybaits.model.po.Bag">
+        <id column="id" property="id" jdbcType="BIGINT" javaType="java.lang.Integer"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="del_flag" property="delFlag"/>
+    </resultMap>
+
+    <select id="inquiryBagByName" resultType="dadawang.springbootmybaits.model.po.Bag">
+        select * from bag where del_flag =2
+        <if test="name !=null and name !=''">
+            and name =#{name}
+        </if>
+        limit 1
+    </select>
+
+
+    <select id="inquiryBagByName2" resultType="dadawang.springbootmybaits.model.po.Bag">
+        select * from bag where del_flag =2
+        <if test="name !=null and name !=''">
+            and name =#{name}
+        </if>
+        limit 1
+    </select>
+</mapper>
